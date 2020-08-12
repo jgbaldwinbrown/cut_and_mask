@@ -1,18 +1,26 @@
 #!/bin/bash
 set -e
 
+# arguments:
+# $1: gzipped VCF input file
+# $2: .bed file containing all regions to remove from the genome
+
+# Generate temporary file to store uncompressed vcf:
+
+TEMP="$(mktemp temp_vcf_XXXXXXXXXX.vcf)"
+
 # identify bad items to remove, and generate a vcf with no bads:
 
-gunzip -c 15515X100_190116_A00421_0031_AHGYLMDSXX_S28_L004_R1_001_bcftools_hiqual.vcf.gz > temp2.vcf
+gunzip -c $1 > "${TEMP}"
 
 # shift vcf:
 
 bedtools intersect \
     -header \
     -v \
-    -a temp2.vcf \
-    -b bigmask2.bed \
-> masked.vcf
+    -a "${TEMP}" \
+    -b "${2}" | \
+python3 shift_vcf_maskmiddle.py "${2}" | \
+pigz -p 7
 
-cat masked.vcf | python3 shift_vcf_maskmiddle.py kraken_mask_final2.bed | \
-pigz -p 7 > 15515X100_190116_A00421_0031_AHGYLMDSXX_S28_L004_R1_001_bcftools_hiqual_masked_shifted.vcf.gz
+rm -f "${TEMP}"
