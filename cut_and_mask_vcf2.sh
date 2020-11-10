@@ -11,7 +11,7 @@ TEMP="$(mktemp temp_vcf_XXXXXXXXXX.vcf)"
 
 # identify bad items to remove, and generate a vcf with no bads:
 
-gunzip -c $1 > "${TEMP}"
+gunzip -c "${1}" > "${TEMP}"
 
 # shift vcf:
 

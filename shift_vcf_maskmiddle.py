@@ -38,7 +38,7 @@ def shift_line(vcf_entry, chrom_mask):
             if interval_start <=0:
                 span = interval_end - interval_start
             else:
-                span = interval_end - interval_start + 100
+                span = interval_end - interval_start - 100
             start = start - span
     vcf_entry_out[1] = str(start)
     return(vcf_entry_out)
