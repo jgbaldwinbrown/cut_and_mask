@@ -9,5 +9,5 @@ bedtools intersect \
     -v \
     -a - \
     -b "${1}" | \
-python3 shift_vcf_maskmiddle.py "${1}" | \
-python3 rename_vcf_chroms.py
+shift_vcf_maskmiddle "${1}" | \
+rename_vcf_chroms
