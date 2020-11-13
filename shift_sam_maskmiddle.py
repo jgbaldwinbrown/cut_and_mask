@@ -41,7 +41,7 @@ def shift_line(sam_entry, chrom_mask, poscol):
             if interval_start <=0:
                 span = interval_end - interval_start
             else:
-                span = interval_end - interval_start + 100
+                span = interval_end - interval_start - 100
             start = start - span
     sam_entry_out[poscol] = str(start)
     return(sam_entry_out)
