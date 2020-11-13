@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
+gunzip -c test.vcf.gz | \
 ./cut_and_mask_vcf2.sh \
-    test.vcf.gz \
-    bigmask2.bed \
+    bigmask2.bed | \
+gzip -c \
 > test_masked.vcf.gz
 
 wdiff <(gunzip -c test.vcf.gz) <(gunzip -c test_masked.vcf.gz )  | grep 'scaffold_4_.*375973' > test_pos.txt

@@ -2,25 +2,11 @@
 set -e
 
 # arguments:
-# $1: gzipped VCF input file
-# $2: .bed file containing all regions to remove from the genome
-
-# Generate temporary file to store uncompressed vcf:
-
-TEMP="$(mktemp temp_vcf_XXXXXXXXXX.vcf)"
-
-# identify bad items to remove, and generate a vcf with no bads:
-
-gunzip -c "${1}" > "${TEMP}"
-
-# shift vcf:
+# $1: .bed file containing all regions to remove from the genome
 
 bedtools intersect \
     -header \
     -v \
-    -a "${TEMP}" \
-    -b "${2}" | \
-python3 shift_vcf_maskmiddle.py "${2}" | \
-pigz -p 7
-
-rm -f "${TEMP}"
+    -a - \
+    -b "${1}" | \
+python3 shift_vcf_maskmiddle.py "${1}"
