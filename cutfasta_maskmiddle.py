@@ -37,9 +37,9 @@ def mask_seq(seq, chrom_mask):
         elif start <= 0:
             seq = seq[end:]
         elif end >= len(seq):
-            seq = seq[:start+1]
+            seq = seq[:start]
         else:
-            seq = seq[:start+1] + gap_filler + seq[end:]
+            seq = seq[:start] + gap_filler + seq[end:]
     return(seq)
 
 def mask_and_print_if_good(header, seq, mask):
