@@ -39,7 +39,8 @@ def shift_line(gff_entry, chrom_mask):
             if interval_start <=0:
                 span = interval_end - interval_start
             else:
-                span = interval_end - interval_start + 100
+                # print("skipping 100 bases")
+                span = (interval_end - interval_start) - 100
             start = start - span
             end = end - span
     gff_entry_out[3] = str(start)
