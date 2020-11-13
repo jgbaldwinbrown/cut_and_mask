@@ -1,0 +1,5 @@
+rename_diff.txt.gz
+test_full.vcf.gz
+test_masked.vcf.gz
+test_pos.txt
+test_renamed.vcf.gz
