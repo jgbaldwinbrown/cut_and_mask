@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
+gunzip -c test.vcf.gz | \
 ./cut_mask_shift_rename_vcf.sh \
-    test.vcf.gz \
     bigmask2.bed \
     8 \
 > test_full.vcf.gz
